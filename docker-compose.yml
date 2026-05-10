@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres_local
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: DataWareHouse
+      # This fixes the sub-directory error from before
+      PGDATA: /var/lib/postgresql/data/pgdata 
+      TZ: "Asia/Kolkata"
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata_volume:/var/lib/postgresql/data
+
+# This is the section you were likely missing:
+volumes:
+  pgdata_volume:
